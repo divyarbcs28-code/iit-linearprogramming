@@ -1,0 +1,21 @@
+int maxDistance(int** arrays, int arraysSize, int* arraysColSize) {
+    int minVal=arrays[0][0];
+    int maxVal=arrays[0][arraysColSize[0]-1];
+    int maxDist=0;
+     for(int i = 1; i < arraysSize; i++) {
+        int currentFirst = arrays[i][0];
+        int currentLast = arrays[i][arraysColSize[i] - 1]; 
+        int dist1 = abs(currentLast - minVal);
+        int dist2 = abs(maxVal - currentFirst);       
+        if (dist1 > maxDist) 
+            maxDist = dist1;
+        if (dist2 > maxDist) 
+            maxDist = dist2;
+        if (currentFirst < minVal) 
+            minVal = currentFirst;
+        if (currentLast > maxVal) 
+            maxVal = currentLast;
+    }
+    
+    return maxDist;
+}
