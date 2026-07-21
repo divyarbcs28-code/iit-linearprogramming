@@ -1,0 +1,24 @@
+class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {
+        TreeSet<Long> slideWin = new TreeSet<Long>();
+        for(int i=0;i<nums.length;i++){
+            Long currentNum = (long) nums[i];
+
+            Long ceil = slideWin.ceiling(currentNum);
+
+            if(ceil != null && ceil-currentNum <=valueDiff)
+                return true;
+            Long floorr = slideWin.floor(currentNum);
+
+            if(floorr!= null && currentNum-floorr<=valueDiff)
+                return true;
+            slideWin.add(currentNum);
+
+            if(slideWin.size() >indexDiff){
+                slideWin.remove((long)nums[i-indexDiff]);
+            }
+        }
+        return false;
+        
+    }
+}
