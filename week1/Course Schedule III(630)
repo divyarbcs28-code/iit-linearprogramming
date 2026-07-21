@@ -1,0 +1,22 @@
+class Solution {
+    public int scheduleCourse(int[][] courses) {
+
+       Arrays.sort(courses, (a, b) -> Integer.compare(a[1], b[1]));
+
+       PriorityQueue<Integer> maxHeap=new PriorityQueue<>((a, b) -> Integer.compare(b, a));
+       int total=0;
+       for(int course[]:courses){
+        int duration=course[0];
+        int lastday=course[1];
+
+        total+=duration;
+        maxHeap.offer(duration);
+
+        if(total>lastday){
+            int longDuration=maxHeap.poll();
+            total-=longDuration;
+        }
+       }
+        return maxHeap.size();
+    }
+}
